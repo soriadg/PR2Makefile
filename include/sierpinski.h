@@ -6,11 +6,11 @@
 
 class SierpinskiTriangle {
 public:
-    SierpinskiTriangle(int width, int height);
-    void generate(const std::string& filename, int iterations) const;
+SierpinskiTriangle(int width, int height);
+void generate(const std::string& filename, int iterations) const;
 
 private:
-    int width, height;
+int width, height;
 };
 
-#endif // SIERPINSKI_H
+#endif
