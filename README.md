@@ -72,5 +72,3 @@ rm -rf obj pattern_gen output/*.ppm
 Salidas en output/: mandelbrot.ppm (~5.1 MB) y sierpinski.ppm (~7.5 MB).
 
 ---
-
-*soriadg — IoT*
