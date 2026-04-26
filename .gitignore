@@ -1,0 +1,18 @@
+# Binarios y Ejecutables
+pattern_gen
+julia_gen
+pattern_gen.exe
+
+# Archivos de objeto y temporales de compilación
+obj/
+*.o
+*.out
+
+# Salidas del programa (imágenes generadas)
+output/
+*.ppm
+
+# Archivos de configuración de IDEs
+.vscode/
+.idea/
+*.swp
