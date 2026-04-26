@@ -75,4 +75,3 @@ Created output/mandelbrot.ppm
 El uso de este Makefile permite que cualquier desarrollador pueda replicar el proyecto con exactitud, garantizando que el entorno de desarrollo sea consistente y libre de errores manuales.
 
 ---
-*Hecho por soriadg*
