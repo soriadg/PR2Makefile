@@ -1,57 +1,56 @@
-# Proyecto PR2Makefile: Automatización con Makefiles
+# Tarea de Makefile
 
-Este proyecto tiene como objetivo demostrar el dominio de la estructura y funcionalidad de un **Makefile** aplicado a un generador de patrones matemáticos (Fractales de Mandelbrot y Sierpinski) en C++.
-
----
-
-## 1. Explicación del Proyecto
-El proyecto consiste en una aplicación de consola que genera imágenes en formato `.ppm`. Utiliza algoritmos matemáticos para renderizar:
-*   **Conjunto de Mandelbrot:** Un fractal definido en el plano complejo.
-*   **Triángulo de Sierpinski:** Generado mediante el algoritmo de "Chaos Game".
-
-La complejidad del proyecto radica en la gestión de múltiples archivos fuente (`main.cpp`, `mandelbrot.cpp`, `sierpinski.cpp`) y sus dependencias, lo cual justifica el uso de un Makefile para automatizar su construcción.
+Makefile para un programa en C++ que genera dos fractales: Mandelbrot y Sierpinski. El código está repartido en tres archivos fuente (main.cpp, mandelbrot.cpp, sierpinski.cpp) con sus respectivas cabeceras.
 
 ---
 
-## 2. Análisis del Makefile
-El `Makefile` actúa como un guion de compilación que estandariza el proceso. A continuación se explica su funcionamiento detallado:
+## Para qué sirve un Makefile?
 
-### Variables (Estandarización)
-*   `CXX = g++`: Define el compilador. 
-*   `CXXFLAGS`: Define los parámetros de calidad y optimización.
-*   `OBJ_DIR`, `SRC_DIR`, `OUTPUT_DIR`: Organizan el proyecto en carpetas.
+Un Makefile automatiza la compilación de un proyecto. En vez de ejecutar manualmente cada comando de compilación, define las reglas una sola vez y `make` se encarga del resto.
 
-### Reglas y Automatización
-1.  **Compilación Incremental:** Solo se recompilan los archivos modificados.
-2.  **Gestión de Directorios:** El Makefile crea las carpetas `obj/` y `output/` automáticamente.
-3.  **Encadenamiento de Comandos:** Verifica dependencias antes de ejecutar.
+**Ventajas:**
+
+- **Compilación incremental:** solo recompila los archivos que cambiaron. En proyectos grandes esto ahorra tiempo significativo.
+- **Estandarización:** cualquier persona que clone el repo compila el proyecto exactamente igual, con los mismos flags y rutas, sin tener que adivinar nada.
+- **Automatización:** una sola instrucción puede compilar, crear directorios, ejecutar pruebas o limpiar el proyecto.
+- **Manejo de dependencias:** make conoce la relación entre archivos y decide por sí solo qué necesita reconstruir.
+
+**Aplicaciones comunes:**
+
+- Compilación de proyectos en C y C++
+- Sistemas embebidos e IoT (toolchains de ARM, AVR, etc.)
+- Generación automática de documentación (Doxygen, LaTeX)
+- Automatización de pruebas y despliegues
+- Cualquier flujo de trabajo donde haya pasos repetitivos que dependan unos de otros
 
 ---
 
-## 3. Instrucciones de Ejecución
-Sigue estos pasos en tu terminal:
+## Flujo del Makefile
 
-1.  **Limpiar archivos previos:**
-```text
+```
+make  →  all  →  pattern_gen  →  obj/  →  output/
+```
+
+**make** — Lee las variables, crea la carpeta obj si falta, compila cada fuente en su archivo objeto y enlaza los tres en pattern_gen. Si un objeto ya está al día respecto a su fuente, lo deja igual y solo vuelve a enlazar.
+
+**make run_mandelbrot / make run_sierpinski** — Verifican que el ejecutable esté actualizado, crean la carpeta output si hace falta y lanzan el programa con el argumento correspondiente.
+
+**make clean** — Elimina los archivos objeto, el ejecutable y las imágenes generadas.
+
+---
+
+## Compilación
+
+```bash
 make clean
-```
-2.  **Compilar el proyecto completo:**
-```text
 make
-```
-3.  **Generar el Fractal de Mandelbrot:**
-```text
 make run_mandelbrot
-```
-4.  **Generar el Triángulo de Sierpinski:**
-```text
 make run_sierpinski
 ```
 
 ---
 
-## 4. Reporte de Resultados de Ejecución
-Al ejecutar los comandos, se obtuvo el siguiente comportamiento:
+## Output
 
 ```text
 $ make
@@ -65,13 +64,13 @@ $ make run_mandelbrot
 ./pattern_gen mandelbrot
 Generating Mandelbrot Set...
 Created output/mandelbrot.ppm
+
+$ make clean
+rm -rf obj pattern_gen output/*.ppm
 ```
 
-**Resultado:** Se generaron exitosamente los archivos en la carpeta `output/`.
+Salidas en output/: mandelbrot.ppm (~5.1 MB) y sierpinski.ppm (~7.5 MB).
 
 ---
 
-## 5. Conclusiones sobre la Automatización
-El uso de este Makefile permite que cualquier desarrollador pueda replicar el proyecto con exactitud, garantizando que el entorno de desarrollo sea consistente y libre de errores manuales.
-
----
+*soriadg — IoT*
